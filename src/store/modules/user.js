@@ -29,24 +29,40 @@ const mutations = {
 
 const actions = {
   // user login
-  login({ commit }, userInfo) {
+  async login({ commit }, userInfo) {
     const { username, password } = userInfo
-    return new Promise((resolve, reject) => {
-      login({ username: username.trim(), password: password }).then(response => {
-        const { data } = response
-        commit('SET_TOKEN', data.token)
-        setToken(data.token)
-        resolve()
-      }).catch(error => {
-        reject(error)
-      })
-    })
+    let result = await login({ username: username.trim(), password: password })
+
+    console.log('登录接口', result);
+
+    if (result.code == 20000) {
+      // 修改仓库中token的值
+      commit('SET_TOKEN', result.data.token)
+      // 往cookie存放token
+      setToken(result.data.token)
+      return 'ok'
+      
+    } else {
+      return Promise.reject(new Error('获取登录接口失败'))
+    }
+
+    // return new Promise((resolve, reject) => {
+    //   login({ username: username.trim(), password: password }).then(response => {
+    //     const { data } = response
+    //     commit('SET_TOKEN', data.token)
+    //     setToken(data.token)
+    //     resolve()
+    //   }).catch(error => {
+    //     reject(error)
+    //   })
+    // })
   },
 
   // get user info
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
       getInfo(state.token).then(response => {
+        
         const { data } = response
 
         if (!data) {
