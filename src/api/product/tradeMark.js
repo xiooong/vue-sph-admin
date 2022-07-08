@@ -12,3 +12,6 @@ export const reqAddOrUpdateTradeMark = (tradeMark) => {
     return request({url:'/admin/product/baseTrademark/save', method:'post', data:tradeMark})
   }
 }
+
+// 删除商品接口
+export const reqRemoveTradeMark = (id) =>request({url:`/admin/product/baseTrademark/remove/${id}`,method:'delete'})
