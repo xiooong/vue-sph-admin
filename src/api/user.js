@@ -1,8 +1,6 @@
 import request from '@/utils/request'
 
-// 后台管理系统API接口在线文档：
-// http://39.98.123.211:8170/swagger-ui.html
-// http://39.98.123.211:8216/swagger-ui.html
+
 
 export function login(data) {
   return request({
