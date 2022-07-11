@@ -33,11 +33,16 @@ if (process.env.NODE_ENV === 'production') {
 // 如果想要中文版 element-ui，按如下方式声明
 Vue.use(ElementUI)
 
-Vue.config.productionTip = false
-
 // 引入api
 import API from '@/api'
 Vue.prototype.$API = API
+
+// 引入全局组件
+import CategorySelect from "@/components/CategorySelect";   //查询模块三级联动组件
+Vue.component(CategorySelect.name,CategorySelect)
+
+Vue.config.productionTip = false
+
 
 new Vue({
   el: '#app',

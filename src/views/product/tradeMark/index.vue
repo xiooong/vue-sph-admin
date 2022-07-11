@@ -181,7 +181,6 @@ export default {
           });
         });
     },
-
     // 修改品牌按钮
     updateTradeMark(row) {
       this.dialogFormVisible = true;
@@ -232,17 +231,15 @@ export default {
       }
       return isJPG && isLt2M;
     },
-
     // 显示对话框
     showDialog() {
       this.dialogFormVisible = true;
       this.tmForm = { tmName: "", logoUrl: "" };
     },
-
     // 调用品牌管理列表接口
     async getTradeMarkList(pager = 1) {
       this.page = pager;
-      // 解构data数据
+    // 解构data数据
       const { page, limit } = this;
       //调用接口
       let result = await this.$API.trademark.reqTradeMarkList(page, limit);
@@ -253,7 +250,6 @@ export default {
         this.list = result.data.records;
       }
     },
-
     // 切换每页条数
     async handleSizeChange(val) {
       this.limit = val;
